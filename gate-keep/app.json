@@ -3,6 +3,10 @@
     "name": "gate-keep",
     "slug": "gate-keep",
     "version": "1.0.0",
+    "assetBundlePatterns": ["**/*"],
+    "fonts": {
+      "Geologica": "../assets/fonts/"
+    },
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "gatekeep",
@@ -33,7 +37,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
