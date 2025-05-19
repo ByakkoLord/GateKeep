@@ -1,7 +1,11 @@
 import { Text, View, TextInput, Pressable, Image } from "react-native";
+import { useRouter } from "expo-router"
 import LoginButtons from "@/components/LoginButtons";
+import LRInputButton from "@/components/LRInputButton";
 
 export default function Index() {
+
+  const router = useRouter()
   return (
     <View style={{ display: "flex", flex: 1 }}>
       <Text
@@ -9,36 +13,9 @@ export default function Index() {
       >
         Login
       </Text>
-      <View style={{ marginTop: 150 }}>
-        <TextInput
-          style={{
-            fontSize: 30,
-            fontFamily: "Geologica_400Regular",
-            backgroundColor: "#E9E9E9",
-            borderRadius: 12,
-            width: "90%",
-            margin: "auto",
-            paddingLeft: 30,
-            paddingTop: 15,
-            paddingBottom: 15,
-          }}
-          placeholder="Nome de Usuário"
-        ></TextInput>
-        <TextInput
-          style={{
-            fontSize: 30,
-            fontFamily: "Geologica_400Regular",
-            backgroundColor: "#E9E9E9",
-            borderRadius: 12,
-            width: "90%",
-            margin: "auto",
-            marginTop: 15,
-            paddingLeft: 30,
-            paddingTop: 15,
-            paddingBottom: 15,
-          }}
-          placeholder="Senha"
-        ></TextInput>
+      <View style={{ marginTop: 150, gap: 20 }}>
+        <LRInputButton placeHolder="Nome de Usuário"></LRInputButton>
+        <LRInputButton placeHolder="Senha"></LRInputButton>
       </View>
       <Pressable>
         <Text
@@ -62,9 +39,9 @@ export default function Index() {
           marginTop: 70,
         }}
       >
-        <LoginButtons image={require("../assets/images/google-icon.png")} />
-        <LoginButtons image={require("../assets/images/facebook.png")} />
-        <LoginButtons image={require("../assets/images/right.png")} />
+        <LoginButtons action={null} image={require("../assets/images/google-icon.png")} />
+        <LoginButtons action={null} image={require("../assets/images/facebook.png")} />
+        <LoginButtons action={() => router.push("/register")} image={require("../assets/images/right.png")} />
       </View>
       <Pressable
         style={{
