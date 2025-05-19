@@ -1,4 +1,5 @@
 import { Text, View, TextInput, Pressable, Image } from "react-native";
+import LoginButtons from "@/components/LoginButtons";
 
 export default function Index() {
   return (
@@ -46,7 +47,7 @@ export default function Index() {
             margin: "auto",
             fontSize: 17,
             marginTop: 15,
-            color: "#3D3D3D" 
+            color: "#3D3D3D",
           }}
         >
           Esqueceu sua Senha?
@@ -61,53 +62,17 @@ export default function Index() {
           marginTop: 70,
         }}
       >
-        <Pressable
-          style={{
-            width: 80,
-            height: 70,
-            backgroundColor: "#D9D9D9",
-            borderRadius: 12,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={require("../assets/images/google-icon.png")}
-          ></Image>
-        </Pressable>
-        <Pressable
-          style={{
-            width: 80,
-            height: 70,
-            backgroundColor: "#D9D9D9",
-            borderRadius: 12,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={require("../assets/images/facebook.png")}
-          ></Image>
-        </Pressable>
-        <Pressable
-          style={{
-            width: 80,
-            height: 70,
-            backgroundColor: "#D9D9D9",
-            borderRadius: 12,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={require("../assets/images/right.png")}
-          ></Image>
-        </Pressable>
+        <LoginButtons image={require("../assets/images/google-icon.png")} />
+        <LoginButtons image={require("../assets/images/facebook.png")} />
+        <LoginButtons image={require("../assets/images/right.png")} />
       </View>
-      <Pressable style={{ justifyContent: "flex-end", alignItems: "center", marginBottom: 15 }}>
+      <Pressable
+        style={{
+          justifyContent: "flex-end",
+          alignItems: "center",
+          marginBottom: 15,
+        }}
+      >
         <Text style={{ fontFamily: "Geologica_400Regular", color: "#3D3D3D" }}>
           Ainda não tem uma conta?
         </Text>
