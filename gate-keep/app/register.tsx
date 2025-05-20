@@ -5,7 +5,7 @@ export default function Cadastro() {
   return (
     <View style={{ flex: 1 }}>
       <Text
-        style={{ fontSize: 60, fontFamily: "Geologica_400Regular", margin: 40 }}
+        style={{ fontSize: 60, fontFamily: "Geologica_400Regular", margin: 40, marginTop: 80 }}
       >
         Registrar-se
       </Text>
@@ -18,7 +18,7 @@ export default function Cadastro() {
           gap: 15,
         }}
       >
-        <LRInputButton placeHolder="Nome de Usuário"></LRInputButton>
+        <LRInputButton showInput={true} placeHolder="Nome de Usuário"></LRInputButton>
         <Text
           style={{
             color: "#878787",
@@ -41,7 +41,7 @@ export default function Cadastro() {
             gap: 15,
           }}
         >
-          <LRInputButton placeHolder="Senha"></LRInputButton>
+          <LRInputButton showInput={true} placeHolder="Senha"></LRInputButton>
           <Text
             style={{
               color: "#878787",
@@ -56,21 +56,8 @@ export default function Cadastro() {
             Use no mínimo 8 Caracteres para criar sua senha
           </Text>
         </View>
-        <LRInputButton placeHolder="Repita a senha"></LRInputButton>
+        <LRInputButton showInput={false} placeHolder="Repita a senha"></LRInputButton>
       </View>
-      <Pressable>
-        <Text
-          style={{
-            fontFamily: "Geologica_400Regular",
-            margin: "auto",
-            fontSize: 17,
-            marginTop: 15,
-            color: "#3D3D3D",
-          }}
-        >
-          Esqueceu sua Senha?
-        </Text>
-      </Pressable>
     </View>
   );
 }

@@ -9,13 +9,13 @@ export default function Index() {
   return (
     <View style={{ display: "flex", flex: 1 }}>
       <Text
-        style={{ fontSize: 60, fontFamily: "Geologica_400Regular", margin: 40 }}
+        style={{ marginBottom: 20, marginTop: 80 ,fontSize: 60, fontFamily: "Geologica_400Regular", margin: 40 }}
       >
         Login
       </Text>
       <View style={{ marginTop: 150, gap: 20 }}>
-        <LRInputButton placeHolder="Nome de Usuário"></LRInputButton>
-        <LRInputButton placeHolder="Senha"></LRInputButton>
+        <LRInputButton showInput={true} placeHolder="Nome de Usuário"></LRInputButton>
+        <LRInputButton showInput={true} placeHolder="Senha"></LRInputButton>
       </View>
       <Pressable>
         <Text
@@ -41,7 +41,7 @@ export default function Index() {
       >
         <LoginButtons action={null} image={require("../assets/images/google-icon.png")} />
         <LoginButtons action={null} image={require("../assets/images/facebook.png")} />
-        <LoginButtons action={() => router.push("/register")} image={require("../assets/images/right.png")} />
+        <LoginButtons action={() => router.push("/interScreen")} image={require("../assets/images/right.png")} />
       </View>
       <Pressable
         style={{

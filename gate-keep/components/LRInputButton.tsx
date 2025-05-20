@@ -1,13 +1,20 @@
 import { TextInput } from "react-native";
+import { useState, createContext } from "react";
 
 type LRInputButtonProps = {
     placeHolder: string
+    showInput: boolean
 }
 
-export default function LRInputButton({placeHolder} :LRInputButtonProps) {
+export default function LRInputButton({placeHolder, showInput} :LRInputButtonProps) {
+
+  const [inputText, setInputText] = useState<string>("")
+
   return (
-    <TextInput
-      style={{
+    <TextInput 
+    value={inputText}
+    onChangeText={setInputText}
+      style={{display: showInput ? "flex" : "none",
         fontSize: 30,
         fontFamily: "Geologica_400Regular",
         backgroundColor: "#E9E9E9",
