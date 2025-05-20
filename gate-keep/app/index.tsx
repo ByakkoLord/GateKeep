@@ -2,12 +2,14 @@ import { Text, View, TextInput, Pressable, Image } from "react-native";
 import { useRouter } from "expo-router"
 import LoginButtons from "@/components/LoginButtons";
 import LRInputButton from "@/components/LRInputButton";
+import { ButtonsContextProvider } from '@/contexts/buttonsContext';
 
 export default function Index() {
 
   const router = useRouter()
   return (
-    <View style={{ display: "flex", flex: 1 }}>
+    <ButtonsContextProvider>
+      <View style={{ display: "flex", flex: 1 }}>
       <Text
         style={{ marginBottom: 20, marginTop: 80 ,fontSize: 60, fontFamily: "Geologica_400Regular", margin: 40 }}
       >
@@ -55,5 +57,7 @@ export default function Index() {
         </Text>
       </Pressable>
     </View>
+    </ButtonsContextProvider>
+    
   );
 }

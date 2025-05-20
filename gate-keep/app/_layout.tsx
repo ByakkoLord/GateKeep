@@ -13,6 +13,7 @@ if (!fontsLoaded && fontError) {
   return (null);
 }
   return (
+
     <Stack
       screenOptions={{
         headerShown: false,

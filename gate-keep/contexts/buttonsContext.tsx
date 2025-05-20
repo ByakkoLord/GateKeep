@@ -1,12 +1,15 @@
-import React, { useState, createContext } from 'react'
-export const buttonsContext = createContext();
+import React, { useState, createContext } from "react";
+export const ButtonsContext = createContext<{
+  activate: boolean;
+  setActivate: React.Dispatch<React.SetStateAction<boolean>>;
+} | null>(null);
 
-export const buttonsContextProvider = ({ Children }: any) => {
-    const [activate, setActivate] = useState(false)
+export const ButtonsContextProvider = ({ children }: any) => {
+  const [activate, setActivate] = useState(false);
 
-    return (
-        <buttonsContext.Provider value={{activate, setActivate}}>
-            {Children}
-        </buttonsContext.Provider>
-    )
-}
+  return (
+    <ButtonsContext.Provider value={{ activate, setActivate }}>
+      {children}
+    </ButtonsContext.Provider>
+  );
+};
