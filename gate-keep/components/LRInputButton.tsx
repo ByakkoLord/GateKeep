@@ -1,20 +1,36 @@
 import { TextInput } from "react-native";
-import { useState, createContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { ButtonsContext } from "@/contexts/buttonsContext";
 
 type LRInputButtonProps = {
-    placeHolder: string
-    showInput: boolean
-}
+  placeHolder: string;
+  showInput: boolean | undefined;
+};
 
-export default function LRInputButton({placeHolder, showInput} :LRInputButtonProps) {
+export default function LRInputButton({
+  placeHolder,
+  showInput,
+}: LRInputButtonProps) {
+  const [inputText, setInputText] = useState<string>("");
+  const {activate, setActivate} = useContext(ButtonsContext)!;
 
-  const [inputText, setInputText] = useState<string>("")
+  useEffect(() => {
+    if (inputText.length >= 8) {
+      setActivate(true);
+      console.log("Input is valid");
+      console.log(inputText);
+      console.log(activate);
+    } else {
+      setActivate(false);
+    }
+  }, [inputText]);
 
   return (
-    <TextInput 
-    value={inputText}
-    onChangeText={setInputText}
-      style={{display: showInput ? "flex" : "none",
+    <TextInput
+      value={inputText}
+      onChangeText={setInputText}
+      style={{
+        display: showInput ? "flex" : "none",
         fontSize: 30,
         fontFamily: "Geologica_400Regular",
         backgroundColor: "#E9E9E9",

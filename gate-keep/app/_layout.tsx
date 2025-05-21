@@ -1,3 +1,4 @@
+import { ButtonsContextProvider } from '@/contexts/buttonsContext';
 import { useFonts, Geologica_400Regular, Geologica_500Medium, Geologica_700Bold, Geologica_600SemiBold } from '@expo-google-fonts/geologica'
 import { Stack } from "expo-router";
 
@@ -13,11 +14,13 @@ if (!fontsLoaded && fontError) {
   return (null);
 }
   return (
+    <ButtonsContextProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
 
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    />
+    </ButtonsContextProvider>
   );
 }

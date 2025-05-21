@@ -1,7 +1,11 @@
 import { View, Text, Pressable } from "react-native";
+import { useContext } from "react";
 import LRInputButton from "@/components/LRInputButton";
+import { ButtonsContext } from "@/contexts/buttonsContext";
 
 export default function Cadastro() {
+  const { activate, setActivate } = useContext(ButtonsContext)!;
+
   return (
     <View style={{ flex: 1 }}>
       <Text
@@ -56,7 +60,7 @@ export default function Cadastro() {
             Use no mínimo 8 Caracteres para criar sua senha
           </Text>
         </View>
-        <LRInputButton showInput={false} placeHolder="Repita a senha"></LRInputButton>
+        <LRInputButton showInput={activate} placeHolder="Repita a senha"></LRInputButton>
       </View>
     </View>
   );

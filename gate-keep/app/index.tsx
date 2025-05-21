@@ -8,8 +8,7 @@ export default function Index() {
 
   const router = useRouter()
   return (
-    <ButtonsContextProvider>
-      <View style={{ display: "flex", flex: 1 }}>
+          <View style={{ display: "flex", flex: 1 }}>
       <Text
         style={{ marginBottom: 20, marginTop: 80 ,fontSize: 60, fontFamily: "Geologica_400Regular", margin: 40 }}
       >
@@ -57,7 +56,6 @@ export default function Index() {
         </Text>
       </Pressable>
     </View>
-    </ButtonsContextProvider>
     
   );
 }
