@@ -1,10 +1,12 @@
 import { View, Text, Pressable, Image } from "react-native";
+import { useRouter } from "expo-router";
 import { useContext } from "react";
 import LRInputButton from "@/components/LRInputButton";
 import { ButtonsContext } from "@/contexts/buttonsContext";
 
 export default function Cadastro() {
-  const { activate, setActivate } = useContext(ButtonsContext)!;
+  const { activate, setActivate, inputText } = useContext(ButtonsContext)!;
+  const router = useRouter();
 
   return (
     <View style={{ flex: 1 }}>
@@ -28,6 +30,8 @@ export default function Cadastro() {
         }}
       >
         <LRInputButton
+          usernamed={false}
+          applyCondition={false}
           showInput={true}
           placeHolder="Nome de Usuário"
         ></LRInputButton>
@@ -53,7 +57,13 @@ export default function Cadastro() {
             gap: 15,
           }}
         >
-          <LRInputButton showInput={true} placeHolder="Senha"></LRInputButton>
+          <LRInputButton
+            usernamed={false}
+            passworded={false}
+            applyCondition={true}
+            showInput={true}
+            placeHolder="Senha"
+          ></LRInputButton>
           <Text
             style={{
               color: "#878787",
@@ -69,6 +79,9 @@ export default function Cadastro() {
           </Text>
         </View>
         <LRInputButton
+          usernamed={false}
+          passworded={false}
+          applyCondition={false}
           showInput={activate}
           placeHolder="Repita a senha"
         ></LRInputButton>

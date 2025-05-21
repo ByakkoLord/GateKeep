@@ -1,3 +1,5 @@
+import React, { useContext } from "react";
+import { ButtonsContext } from "@/contexts/buttonsContext";
 import {
   Text,
   View,
@@ -13,10 +15,33 @@ type LoginButtonProps = {
 };
 
 export default function LoginButtons({ image, action }: LoginButtonProps) {
+
+  const { username, setUsername, password, setPassword } = useContext(ButtonsContext)!;
+  async function consumirAPI() {
+    console.log("Consumindo API");
+    console.log(username);
+    console.log(password);
+    const resposta = await fetch("http://192.168.0.138:3000/auth-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: username, password: password }),
+    });
+    console.log(resposta);
+
+    if (!resposta.ok) {
+      throw new Error("Erro ao consumir a API");
+    }
+
+    const dados = await resposta.json();
+    console.log(dados);
+  }
+  
+
   return (
     <Pressable
-        onPress={action}
-
+      onPress={consumirAPI}
       style={({ pressed }) => [
         {
           width: 80,

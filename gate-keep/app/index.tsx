@@ -15,8 +15,8 @@ export default function Index() {
         Login
       </Text>
       <View style={{ marginTop: 150, gap: 20 }}>
-        <LRInputButton showInput={true} placeHolder="Nome de Usuário"></LRInputButton>
-        <LRInputButton showInput={true} placeHolder="Senha"></LRInputButton>
+        <LRInputButton usernamed={true} passworded={false} applyCondition={false} showInput={true} placeHolder="Nome de Usuário"></LRInputButton>
+        <LRInputButton usernamed={false} passworded={true} applyCondition={false} showInput={true} placeHolder="Senha"></LRInputButton>
       </View>
       <Pressable>
         <Text
@@ -40,7 +40,8 @@ export default function Index() {
           marginTop: 70,
         }}
       >
-        <LoginButtons action={null} image={require("../assets/images/google-icon.png")} />
+        <LoginButtons
+         action={null} image={require("../assets/images/google-icon.png")} />
         <LoginButtons action={null} image={require("../assets/images/facebook.png")} />
         <LoginButtons action={() => router.push("/interScreen")} image={require("../assets/images/right.png")} />
       </View>

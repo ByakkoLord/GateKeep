@@ -4,31 +4,52 @@ import { ButtonsContext } from "@/contexts/buttonsContext";
 
 type LRInputButtonProps = {
   placeHolder: string;
-  showInput: boolean | undefined;
+  showInput: boolean;
+  applyCondition: boolean;
+  usernamed: boolean;
+  passworded?: boolean;
 };
 
 export default function LRInputButton({
   placeHolder,
   showInput,
+  applyCondition,
+  usernamed,
+  passworded,
 }: LRInputButtonProps) {
-  const [inputText, setInputText] = useState<string>("");
-  const {activate, setActivate} = useContext(ButtonsContext)!;
+  const {
+    activate,
+    setActivate,
+    inputText,
+    setInputText,
+    username,
+    setUsername,
+    password,
+    setPassword,
+  } = useContext(ButtonsContext)!;
 
   useEffect(() => {
-    if (inputText.length >= 8) {
-      setActivate(true);
-      console.log("Input is valid");
-      console.log(inputText);
-      console.log(activate);
-    } else {
-      setActivate(false);
+    if (applyCondition) {
+      console.log("Apply condition is true");
+      if (inputText.length >= 8) {
+        console.log("Apply?" + applyCondition);
+        setActivate(true);
+        console.log("Input is valid");
+        console.log(inputText);
+        console.log(activate);
+      } else {
+        setActivate(false);
+      }
     }
-  }, [inputText]);
+  }, [inputText, applyCondition]);
 
   return (
     <TextInput
-      value={inputText}
-      onChangeText={setInputText}
+      value={usernamed ? username : password}
+      onChangeText={(text) => {
+        if (usernamed) setUsername(text), console.log(text);
+        if (passworded) setPassword(text), console.log(text);
+      }}
       style={{
         display: showInput ? "flex" : "none",
         fontSize: 30,
