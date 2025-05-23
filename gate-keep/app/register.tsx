@@ -1,12 +1,37 @@
-import { View, Text, Pressable, Image } from "react-native";
-import { useRouter } from "expo-router";
-import { useContext } from "react";
-import LRInputButton from "@/components/LRInputButton";
 import { ButtonsContext } from "@/contexts/buttonsContext";
+import { useRouter } from "expo-router";
+import { useContext, useState } from "react";
+import { Image, Pressable, Text, TextInput, View } from "react-native";
 
 export default function Cadastro() {
   const { activate, setActivate, inputText } = useContext(ButtonsContext)!;
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const router = useRouter();
+
+  async function createUser() {
+    try {
+      console.log("Sending new User");
+      console.log("E-mail: " + userEmail, "Password: " + inputText);
+      const resposta = await fetch("http://26.73.113.96:3000/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail: userEmail,
+          userPassword: userPassword,
+          userName: "Pedro Straub Mantoan",
+          birthDate: "2002-10-26",
+          userCpf: "48144444404",
+          phoneNumber: "11977777777"
+        }),
+      });
+      console.log("Resposta da API:", resposta.body);
+    } catch (error) {
+      console.error("Erro ao criar usuário:", error);
+    }
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -29,12 +54,24 @@ export default function Cadastro() {
           gap: 15,
         }}
       >
-        <LRInputButton
-          usernamed={false}
-          applyCondition={false}
-          showInput={true}
-          placeHolder="Nome de Usuário"
-        ></LRInputButton>
+        <TextInput
+          value={userEmail}
+          onChangeText={(text) => {
+            setUserEmail(text);
+          }}
+          placeholder={"Nome de Usuário"}
+          style={{
+            fontSize: 30,
+            fontFamily: "Geologica_400Regular",
+            backgroundColor: "#E9E9E9",
+            borderRadius: 12,
+            width: "90%",
+            margin: "auto",
+            paddingLeft: 30,
+            paddingTop: 15,
+            paddingBottom: 15,
+          }}
+        ></TextInput>
         <Text
           style={{
             color: "#878787",
@@ -57,13 +94,27 @@ export default function Cadastro() {
             gap: 15,
           }}
         >
-          <LRInputButton
-            usernamed={false}
-            passworded={false}
-            applyCondition={true}
-            showInput={true}
-            placeHolder="Senha"
-          ></LRInputButton>
+          <TextInput
+            placeholder={"Senha"}
+            onChange={(text) => {
+              setActivate(false);
+              setUserPassword(text.nativeEvent.text);
+              if (text.nativeEvent.text.length >= 8) {
+                setActivate(true);
+              }
+            }}
+            style={{
+              fontSize: 30,
+              fontFamily: "Geologica_400Regular",
+              backgroundColor: "#E9E9E9",
+              borderRadius: 12,
+              width: "90%",
+              margin: "auto",
+              paddingLeft: 30,
+              paddingTop: 15,
+              paddingBottom: 15,
+            }}
+          ></TextInput>
           <Text
             style={{
               color: "#878787",
@@ -78,14 +129,30 @@ export default function Cadastro() {
             Use no mínimo 8 Caracteres para criar sua senha
           </Text>
         </View>
-        <LRInputButton
-          usernamed={false}
-          passworded={false}
-          applyCondition={false}
-          showInput={activate}
-          placeHolder="Repita a senha"
-        ></LRInputButton>
+        <TextInput
+          placeholder={"Repita sua Senha"}
+          style={{
+            display: activate ? "flex" : "none",
+            fontSize: 30,
+            fontFamily: "Geologica_400Regular",
+            backgroundColor: "#E9E9E9",
+            borderRadius: 12,
+            width: "90%",
+            margin: "auto",
+            paddingLeft: 30,
+            paddingTop: 15,
+            paddingBottom: 15,
+          }}
+        ></TextInput>
         <Pressable
+          onPress={() => {
+            createUser();
+           /* if (userPassword === passwordRepeat) {
+              createUser();
+            } else {
+              console.log("As senhas não coincidem");
+            */}
+          }
           style={{
             display: "flex",
             flexDirection: "row",
