@@ -22,8 +22,8 @@ export default function LRInputButton({
     setActivate,
     inputText,
     setInputText,
-    username,
-    setUsername,
+    userEmail,
+    setUserEmail,
     password,
     setPassword,
   } = useContext(ButtonsContext)!;
@@ -45,9 +45,9 @@ export default function LRInputButton({
 
   return (
     <TextInput
-      value={usernamed ? username : password}
+      value={usernamed ? userEmail : password}
       onChangeText={(text) => {
-        if (usernamed) setUsername(text), console.log(text);
+        if (usernamed) setUserEmail(text), console.log(text);
         if (passworded) setPassword(text), console.log(text);
       }}
       style={{

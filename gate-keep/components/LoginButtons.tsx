@@ -1,13 +1,6 @@
-import React, { useContext } from "react";
 import { ButtonsContext } from "@/contexts/buttonsContext";
-import {
-  Text,
-  View,
-  TextInput,
-  Pressable,
-  Image,
-  ImageSourcePropType,
-} from "react-native";
+import React, { useContext } from "react";
+import { Image, ImageSourcePropType, Pressable } from "react-native";
 
 type LoginButtonProps = {
   image: ImageSourcePropType;
@@ -15,30 +8,36 @@ type LoginButtonProps = {
 };
 
 export default function LoginButtons({ image, action }: LoginButtonProps) {
-
-  const { username, setUsername, password, setPassword } = useContext(ButtonsContext)!;
+  ("");
+  const { userEmail, setUserEmail, password, setPassword } =
+    useContext(ButtonsContext)!;
   async function consumirAPI() {
-    console.log("Consumindo API");
-    console.log(username);
-    console.log(password);
-    const resposta = await fetch("http://192.168.0.138:3000/auth-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: username, password: password }),
-    });
-    console.log(resposta);
+    try {
+      console.log("Consumindo API");
+      console.log("E-mail: " + userEmail, "Password: " + password);
 
-    if (!resposta.ok) {
-      throw new Error("Erro ao consumir a API");
+      const resposta = await fetch("http://192.168.0.239:3000/auth-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail: userEmail,
+          userPassword: password,
+        }),
+      });
+
+      if (!resposta.ok) {
+        console.log("Resposta não OK:", resposta.status);
+        throw new Error("Erro ao consumir a API");
+      }
+
+      const dados = await resposta.json();
+      console.log(dados);
+    } catch (error) {
+      console.error("Erro no fetch:", error);
     }
-
-    const dados = await resposta.json();
-    console.log(dados);
   }
-  
-
   return (
     <Pressable
       onPress={consumirAPI}

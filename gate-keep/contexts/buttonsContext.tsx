@@ -4,8 +4,8 @@ export const ButtonsContext = createContext<{
   setActivate: React.Dispatch<React.SetStateAction<boolean>>;
   inputText: string;
   setInputText: React.Dispatch<React.SetStateAction<string>>;
-  username: string;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  userEmail: string;
+  setUserEmail: React.Dispatch<React.SetStateAction<string>>;
   password: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
 } | null>(null);
@@ -13,7 +13,7 @@ export const ButtonsContext = createContext<{
 export const ButtonsContextProvider = ({ children }: any) => {
   const [activate, setActivate] = useState(false);
   const [inputText, setInputText] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   return (
@@ -23,8 +23,8 @@ export const ButtonsContextProvider = ({ children }: any) => {
         setActivate,
         inputText,
         setInputText,
-        username,
-        setUsername,
+        userEmail,
+        setUserEmail,
         password,
         setPassword,
       }}
