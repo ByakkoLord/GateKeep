@@ -1,4 +1,5 @@
 import { ButtonsContext } from "@/contexts/buttonsContext";
+import { router } from "expo-router";
 import React, { useContext } from "react";
 import { Image, ImageSourcePropType, Pressable } from "react-native";
 
@@ -16,7 +17,7 @@ export default function LoginButtons({ image, action }: LoginButtonProps) {
       console.log("Consumindo API");
       console.log("E-mail: " + userEmail, "Password: " + password);
 
-      const resposta = await fetch("http://192.168.0.239:3000/auth-session", {
+      const resposta = await fetch("http://26.73.113.96:3000/auth-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,7 +27,7 @@ export default function LoginButtons({ image, action }: LoginButtonProps) {
           userPassword: password,
         }),
       });
-
+      console.log("Resposta da API:", resposta.body);
       if (!resposta.ok) {
         console.log("Resposta não OK:", resposta.status);
         throw new Error("Erro ao consumir a API");
@@ -40,7 +41,13 @@ export default function LoginButtons({ image, action }: LoginButtonProps) {
   }
   return (
     <Pressable
-      onPress={consumirAPI}
+      onPress={() => {
+        console.log("Try Login");
+        router.push("/interScreen"),
+          consumirAPI(),
+          setPassword(""),
+          setUserEmail("");
+      }}
       style={({ pressed }) => [
         {
           width: 80,
