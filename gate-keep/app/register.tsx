@@ -1,19 +1,38 @@
 import { ButtonsContext } from "@/contexts/buttonsContext";
 import { useRouter } from "expo-router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
+import ErrorBox from "@/components/ErrorBox";
 
 export default function Cadastro() {
   const { activate, setActivate, inputText } = useContext(ButtonsContext)!;
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [displayConfirm, setDisplayConfirm] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (
+      userPassword.length >= 8 &&
+      passwordRepeat.length >= 8 &&
+      userPassword === passwordRepeat
+    ) {
+      console.log("As senhas coincidem");
+      setDisplayConfirm(true);
+    } else {
+      console.log("As senhas não coincidem");
+      setDisplayConfirm(false);
+    }
+  }, [userPassword, passwordRepeat]);
+
+  // Função para criar o usuário
 
   async function createUser() {
     try {
       console.log("Sending new User");
       console.log("E-mail: " + userEmail, "Password: " + inputText);
-      const resposta = await fetch("http://26.73.113.96:3000/user", {
+      const resposta = await fetch("http://192.168.0.239:3000/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,20 +40,30 @@ export default function Cadastro() {
         body: JSON.stringify({
           userEmail: userEmail,
           userPassword: userPassword,
-          userName: "Pedro Straub Mantoan",
-          birthDate: "2002-10-26",
-          userCpf: "48144444404",
-          phoneNumber: "11977777777"
+          userName: "Pedrtraub Masntoan",
+          birthDate: "2003-10-26",
+          userCpf: "4811544404",
+          phoneNumber: "11977722777",
         }),
       });
-      console.log("Resposta da API:", resposta.body);
+
+      console.log("Resposta da API:", await resposta.json());
+      if (resposta.status === 200) {
+        console.log("Usuário criado com sucesso!");
+        router.push("/");
+      } else {
+        console.log("Erro ao criar usuário:", resposta.status);
+      }
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
+      console.log("userPassword", userPassword);
+      console.log("passwordRepeat", passwordRepeat);
     }
   }
 
   return (
     <View style={{ flex: 1 }}>
+       
       <Text
         style={{
           fontSize: 60,
@@ -130,6 +159,8 @@ export default function Cadastro() {
           </Text>
         </View>
         <TextInput
+          value={passwordRepeat}
+          onChangeText={(text) => setPasswordRepeat(text)}
           placeholder={"Repita sua Senha"}
           style={{
             display: activate ? "flex" : "none",
@@ -144,17 +175,19 @@ export default function Cadastro() {
             paddingBottom: 15,
           }}
         ></TextInput>
+        
         <Pressable
           onPress={() => {
             createUser();
-           /* if (userPassword === passwordRepeat) {
+            if (userPassword === passwordRepeat) {
+              console.log("As senhas coincidem");
               createUser();
             } else {
               console.log("As senhas não coincidem");
-            */}
-          }
+            }
+          }}
           style={{
-            display: "flex",
+            display: displayConfirm ? "flex" : "none",
             flexDirection: "row",
             marginTop: 30,
             marginBottom: 30,
@@ -186,7 +219,12 @@ export default function Cadastro() {
             source={require("../assets/images/right.png")}
           />
         </Pressable>
+       
       </View>
+      <ErrorBox
+          errorMessage={"As senhas não coincidem"}
+          showError={userPassword !== passwordRepeat}
+        />
     </View>
   );
 }

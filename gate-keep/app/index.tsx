@@ -15,7 +15,7 @@ export default function Index() {
         Login
       </Text>
       <View style={{ marginTop: 150, gap: 20 }}>
-        <LRInputButton usernamed={true} passworded={false} applyCondition={false} showInput={true} placeHolder="Nome de Usuário"></LRInputButton>
+        <LRInputButton usernamed={true} passworded={false} applyCondition={false} showInput={true} placeHolder="E-mail de Usuário"></LRInputButton>
         <LRInputButton usernamed={false} passworded={true} applyCondition={false} showInput={true} placeHolder="Senha"></LRInputButton>
       </View>
       <Pressable>
@@ -46,6 +46,9 @@ export default function Index() {
         <LoginButtons action={() => router.push("/interScreen")} image={require("../assets/images/right.png")} />
       </View>
       <Pressable
+        onPress={() => {
+          router.push("/interScreen");
+        }}
         style={{
           justifyContent: "flex-end",
           alignItems: "center",
